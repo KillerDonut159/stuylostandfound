@@ -1,4 +1,4 @@
 # stuylostandfound
-Lost and Found: The Website V0.5
+Lost and Found: The Website V0.6
 
-Uses bootstrap to make it look good yep
+Now featuring credits, contacts, and more!
