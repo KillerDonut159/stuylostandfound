@@ -88,5 +88,10 @@ li a:hover {
 }
 
 .bg-epic {
-    background-color: #ce4545;
+    background-color: #d45c5c;
+    box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.text-shadow {
+    text-shadow: 2px 2px 5px #535353;
 }
