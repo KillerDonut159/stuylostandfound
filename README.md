@@ -1,4 +1,4 @@
 # stuylostandfound
-Lost and Found: The Website V0.6
+Lost and Found: The Website V0.7
 
-Now featuring credits, contacts, and more!
+The catalogue begins...
