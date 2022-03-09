@@ -34,12 +34,12 @@ def add_item(table, item):
     C.execute(f"INSERT INTO {table} VALUES {BLANK_TABLE_ROW}", mapa(item.get, FIELDS))
     DB.commit()
 
+def first(lst):
+    return lst[0]
+
 def get_column(table, field):
     C.execute(f"SELECT {field} FROM {table}")
     return mapa(first, C.fetchall())
-
-def first(lst):
-    return lst[0]
 
 def get_items(table):
     def get_table_column(field):
