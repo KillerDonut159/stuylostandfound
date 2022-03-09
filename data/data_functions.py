@@ -7,8 +7,8 @@ FIELDS = ["number", "date", "description", "link"]
 def mapa(function, *lsts):
     return list(map(function, *lsts))
 
-def get_list_string(strings):
-    return f"({', '.join(strings)})"
+def get_field_string(function):
+    return f"({', '.join(mapa(function, FIELDS))})"
 
 def add_type(field):
     return f"{field} TEXT"
@@ -18,8 +18,8 @@ def get_question_mark(field):
 
 DB = connect(DB_NAME)
 C = DB.cursor()
-TABLE_HEADER = get_list_string(mapa(add_type, FIELDS))
-BLANK_TABLE_ROW = get_list_string(mapa(get_question_mark, FIELDS))
+TABLE_HEADER = get_field_string(add_type)
+BLANK_TABLE_ROW = get_field_string(get_question_mark)
 
 def get_item(*values):
     return dict(zip(FIELDS, values))
