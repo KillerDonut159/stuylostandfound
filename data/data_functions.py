@@ -31,3 +31,7 @@ def get_item(values):
 def get_items(table):
     C.execute(f"SELECT * FROM {table}")
     return mapa(get_item, C.fetchall())
+
+def remove_item(table, field, value):
+    C.execute(f"DELETE FROM {table} WHERE {field} = ?", [value])
+    DB.commit()
