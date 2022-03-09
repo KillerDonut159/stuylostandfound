@@ -44,5 +44,4 @@ def get_column(table, field):
 def get_items(table):
     def get_table_column(field):
         return get_column(table, field)
-    columns = mapa(get_table_column, FIELDS)
-    return mapa(get_item, *columns)
+    return mapa(get_item, *mapa(get_table_column, FIELDS))
