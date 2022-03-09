@@ -10,16 +10,10 @@ def mapa(function, *lsts):
 def get_field_string(function):
     return f"({', '.join(mapa(function, FIELDS))})"
 
-def add_type(field):
-    return f"{field} TEXT"
-
-def get_question_mark(field):
-    return "?"
-
 DB = connect(DB_NAME)
 C = DB.cursor()
-TABLE_HEADER = get_field_string(add_type)
-BLANK_TABLE_ROW = get_field_string(get_question_mark)
+TABLE_HEADER = get_field_string(lambda field : f"{field} TEXT")
+BLANK_TABLE_ROW = get_field_string(lambda field : "?")
 
 def reset_data():
     open(DB_NAME, "w").close()
