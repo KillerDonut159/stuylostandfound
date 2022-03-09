@@ -1,8 +1,6 @@
 from sqlite3 import connect
 
 DB_NAME = "data.db"
-DB = connect(DB_NAME)
-C = DB.cursor()
 TABLES = ["outwear", "gloves", "schoolsupplies", "books", "smallitems"]
 FIELDS = ["number", "date", "description", "link"]
 
@@ -18,6 +16,8 @@ def add_type(field):
 def get_question_mark(field):
     return "?"
 
+DB = connect(DB_NAME)
+C = DB.cursor()
 TABLE_HEADER = get_list_string(mapa(add_type, FIELDS))
 BLANK_TABLE_ROW = get_list_string(mapa(get_question_mark, FIELDS))
 
