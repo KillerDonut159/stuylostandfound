@@ -4,16 +4,16 @@ DB_NAME = "data.db"
 TABLES = ["outwear", "gloves", "schoolsupplies", "books", "smallitems"]
 FIELDS = ["number", "date", "description", "link"]
 
-def mapa(function, *lsts):
-    return list(map(function, *lsts))
-
 def get_field_string(function):
-    return f"({', '.join(mapa(function, FIELDS))})"
+    return f"({', '.join(map(function, FIELDS))})"
 
 DB = connect(DB_NAME)
 C = DB.cursor()
 TABLE_HEADER = get_field_string(lambda field : f"{field} TEXT")
 BLANK_TABLE_ROW = get_field_string(lambda field : "?")
+
+def mapa(function, *lsts):
+    return list(map(function, *lsts))
 
 def reset_data():
     open(DB_NAME, "w").close()
