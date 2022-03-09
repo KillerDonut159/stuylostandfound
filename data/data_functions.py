@@ -32,13 +32,13 @@ def reset_data():
 def add_item(table, item):
     db = connect("data.db")
     c = db.cursor()
-    c.execute(f"INSERT INTO {table} VALUES {get_list_string(map(get_question_mark, FIELDS))}", mapa(item.get, FIELDS))
+    c.execute(f"INSERT INTO {table} VALUES {get_list_string(mapa(get_question_mark, FIELDS))}", mapa(item.get, FIELDS))
     db.commit()
 
 def get_column(table, field):
     db = connect("data.db")
     c = db.cursor()
-    c.execute(f"SELECT {field} from {table}")
+    c.execute(f"SELECT {field} FROM {table}")
     return mapa(first, c.fetchall())
 
 def get_items(table):
