@@ -1,5 +1,8 @@
 from sqlite3 import connect
 
+DB_NAME = "data.db"
+DB = connect(DB_NAME)
+C = DB.cursor()
 TABLES = ["outwear", "gloves", "schoolsupplies", "books", "smallitems"]
 FIELDS = ["number", "date", "description", "link"]
 
@@ -22,24 +25,18 @@ def get_item(*values):
     return dict(zip(FIELDS, values))
 
 def reset_data():
-    open("data.db", "w").close()
-    db = connect("data.db")
-    c = db.cursor()
+    open(DB_NAME, "w").close()
     for table in TABLES:
-        c.execute(f"CREATE TABLE IF NOT EXISTS {table} {TABLE_HEADER}")
-    db.commit()
+        C.execute(f"CREATE TABLE IF NOT EXISTS {table} {TABLE_HEADER}")
+    DB.commit()
 
 def add_item(table, item):
-    db = connect("data.db")
-    c = db.cursor()
-    c.execute(f"INSERT INTO {table} VALUES {BLANK_TABLE_ROW}", mapa(item.get, FIELDS))
-    db.commit()
+    C.execute(f"INSERT INTO {table} VALUES {BLANK_TABLE_ROW}", mapa(item.get, FIELDS))
+    DB.commit()
 
 def get_column(table, field):
-    db = connect("data.db")
-    c = db.cursor()
-    c.execute(f"SELECT {field} FROM {table}")
-    return mapa(first, c.fetchall())
+    C.execute(f"SELECT {field} FROM {table}")
+    return mapa(first, C.fetchall())
 
 def first(lst):
     return lst[0]
