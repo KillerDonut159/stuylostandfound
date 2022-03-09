@@ -1,10 +1,14 @@
 from sqlite3 import connect
 
+DB_NAME = "data.db"
 TABLES = ["outwear", "gloves", "schoolsupplies", "books", "smallitems"]
 FIELDS = ["number", "date", "description", "link"]
 
 def mapa(function, *lsts):
     return list(map(function, *lsts))
+
+def get_field_string(function):
+    return f"({', '.join(mapa(function, FIELDS))})"
 
 def add_type(field):
     return f"{field} TEXT"
@@ -12,39 +16,32 @@ def add_type(field):
 def get_question_mark(field):
     return "?"
 
-def get_list_string(strings):
-    return f"({', '.join(strings)})"
-
-def first(lst):
-    return lst[0]
+DB = connect(DB_NAME)
+C = DB.cursor()
+TABLE_HEADER = get_field_string(add_type)
+BLANK_TABLE_ROW = get_field_string(get_question_mark)
 
 def get_item(*values):
     return dict(zip(FIELDS, values))
 
 def reset_data():
-    open("data.db", "w").close()
-    db = connect("data.db")
-    c = db.cursor()
+    open(DB_NAME, "w").close()
     for table in TABLES:
-        c.execute(f"CREATE TABLE IF NOT EXISTS {table} {get_list_string(mapa(add_type, FIELDS))}")
-    db.commit()
+        C.execute(f"CREATE TABLE IF NOT EXISTS {table} {TABLE_HEADER}")
+    DB.commit()
 
 def add_item(table, item):
-    db = connect("data.db")
-    c = db.cursor()
-    c.execute(f"INSERT INTO {table} VALUES {get_list_string(map(get_question_mark, FIELDS))}", mapa(item.get, FIELDS))
-    db.commit()
+    C.execute(f"INSERT INTO {table} VALUES {BLANK_TABLE_ROW}", mapa(item.get, FIELDS))
+    DB.commit()
+
+def first(lst):
+    return lst[0]
 
 def get_column(table, field):
-    db = connect("data.db")
-    c = db.cursor()
-    c.execute(f"SELECT {field} from {table}")
-    return mapa(first, c.fetchall())
+    C.execute(f"SELECT {field} FROM {table}")
+    return mapa(first, C.fetchall())
 
 def get_items(table):
     def get_table_column(field):
         return get_column(table, field)
-    columns = mapa(get_table_column, FIELDS)
-    def get_table_item(*values):
-        return dict(zip(FIELDS, values))
-    return mapa(get_table_item, *columns)
+    return mapa(get_item, *mapa(get_table_column, FIELDS))
