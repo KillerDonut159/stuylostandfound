@@ -21,9 +21,6 @@ C = DB.cursor()
 TABLE_HEADER = get_field_string(add_type)
 BLANK_TABLE_ROW = get_field_string(get_question_mark)
 
-def get_item(*values):
-    return dict(zip(FIELDS, values))
-
 def reset_data():
     open(DB_NAME, "w").close()
     for table in TABLES:
@@ -34,14 +31,9 @@ def add_item(table, item):
     C.execute(f"INSERT INTO {table} VALUES {BLANK_TABLE_ROW}", mapa(item.get, FIELDS))
     DB.commit()
 
-def first(lst):
-    return lst[0]
-
-def get_column(table, field):
-    C.execute(f"SELECT {field} FROM {table}")
-    return mapa(first, C.fetchall())
+def get_item(values):
+    return dict(zip(FIELDS, values))
 
 def get_items(table):
-    def get_table_column(field):
-        return get_column(table, field)
-    return mapa(get_item, *mapa(get_table_column, FIELDS))
+    C.execute(f"SELECT * FROM {table}")
+    return mapa(get_item, C.fetchall())
