@@ -9,3 +9,4 @@ Roadmap:
 - Implement database into catalogues
 - Add a page which allows one to update catalogue directly from website itself
 - Add a search function
+- Make website more mobile-friendly
