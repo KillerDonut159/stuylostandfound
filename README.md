@@ -1,12 +1,14 @@
 # stuylostandfound
-Lost and Found: The Website V1.0
+Lost and Found: The Website V1.1
 
-Released!!
+**MOBILE-FRIENDLY (ish)!!!!**
+Finally made sidebar work such that mobile devices have a much easier time navigating
+("Sidebar" is not really a sidebar but it is essentially a nav bar on mobile)
 
-The python database has still yet to be implemented, but as of now we have a basic working version that can be updated daily (albeit, at a slower pace)
+Python database has yet to be implemented into website, but we hope to get this done shortly!
 
 Roadmap:
 - Implement database into catalogues
 - Add a page which allows one to update catalogue directly from website itself
 - Add a search function
-- Make website more mobile-friendly
+
