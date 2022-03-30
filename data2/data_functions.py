@@ -1,4 +1,5 @@
 from sqlite3 import connect, Row
+from os import system
 
 
 def reset_data():
@@ -8,6 +9,7 @@ def reset_data():
     c.execute("CREATE TABLE mesa (id INTEGER, found INTEGER, category TEXT, date TEXT, description TEXT, link TEXT)")
     db.commit()
     db.close()
+    system("rm www/lostitem*")
 
 def get_next_id():
     db = connect("data.db")
@@ -19,12 +21,16 @@ def get_next_id():
         return 0
     return max_id + 1
 
-def add_item(category, date, description, link):
+def add_item(category, date, description, link, image):
+    id = get_next_id()
     db = connect("data.db")
     c = db.cursor()
-    c.execute("INSERT INTO mesa VALUES (?, ?, ?, ?, ?, ?)", (get_next_id(), 0, category, date, description, link))
+    c.execute("INSERT INTO mesa VALUES (?, 0, ?, ?, ?, ?)", (id, category, date, description, link))
     db.commit()
     db.close()
+    file = open(f"www/lostitem{str(id)}", "wb")
+    file.write(image)
+    file.close()
 
 def row_to_dic(row):
     dic = dict(row)
