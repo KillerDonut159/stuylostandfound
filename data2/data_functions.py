@@ -1,7 +1,6 @@
 from sqlite3 import connect, Row
 from os import system
 
-
 def reset_data():
     open("data.db", "w").close()
     db = connect("data.db")
@@ -21,6 +20,9 @@ def get_next_id():
         return 0
     return max_id + 1
 
+def id_to_filename(id):
+    return f"www/lostitem{str(id)}"
+
 def add_item(category, date, description, link, image):
     id = get_next_id()
     db = connect("data.db")
@@ -28,7 +30,7 @@ def add_item(category, date, description, link, image):
     c.execute("INSERT INTO mesa VALUES (?, 0, ?, ?, ?, ?)", (id, category, date, description, link))
     db.commit()
     db.close()
-    file = open(f"www/lostitem{str(id)}", "wb")
+    file = open(id_to_filename(id), "wb")
     file.write(image)
     file.close()
 
@@ -36,6 +38,8 @@ def row_to_dic(row):
     dic = dict(row)
     dic.pop("found")
     dic.pop("category")
+    dic["filename"] = id_to_filename(dic["id"])
+    dic.pop("id")
     return dic
 
 def get_items(category):
@@ -50,10 +54,6 @@ def get_items(category):
 def update_found(id, found):
     db = connect("data.db")
     c = db.cursor()
-    if found:
-        found = 1
-    else:
-        found = 0
-    c.execute("UPDATE mesa SET found = ? WHERE id = ?", (found, id))
+    c.execute("UPDATE mesa SET found = ? WHERE id = ?", (int(found), id))
     db.commit()
     db.close()
