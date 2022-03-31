@@ -95,3 +95,5 @@ li a:hover {
 .text-shadow {
     text-shadow: 2px 2px 5px #535353;
 }
+
+tr:nth-child(odd) {background-color:#b8b8b8}
