@@ -62,17 +62,38 @@
             <input class="btn btn-info mb-1 mt-1" type="submit" value="Submit">
           </form>
 
-        <br><br> 
-        <div class="row">
-          {% for i in outerweartable %}
-    
-          <div class="col col-lg-5">
-            {{ i }}
-          </div>
-          {% endfor %}
-    
+        <br><br>
+        <div class=main>
+            <p>
+            <table style="width:100%;font-family:Trebuchet MS;">
+                <tr style="background-color:#f0f0f0">>
+                    <th>Date Catalogued</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>{{ outerweardescription }}</td>
+                    <td>% oneDescription(1) %</td>
+                </tr>
+            </table>
+            </p>
+            </div>
+            <div class="container">
+                {% for i in outerweardate %}   
+                <div class="row">
+                    <div class="col col-lg-5">
+                    {{ i }}
+                    </div>
+                </div>
+                {% endfor %}
+                {% for i in outerweardescription %}   
+                <div class="row">
+                    <div class="col col-lg-5">
+                    {{ i }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
-      </div>
     
     
       

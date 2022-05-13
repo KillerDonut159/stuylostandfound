@@ -7,7 +7,6 @@ def create_database():
     db = connect("lost_and_found.db")
     c = db.cursor()
     c.execute("create table outerwear (date text, description text)")
-    c.execute("insert into outerwear values ('5/12/22', 'Heheheha')")
     db.commit()
     db.close()
 
@@ -18,10 +17,34 @@ def database_add(date, description):
     db.commit()
     db.close() 
 
-def database_display():
+def database_display_date():
     db = connect("lost_and_found.db")
     c = db.cursor()
-    c.execute("select * from outerwear;")
+    c.execute("select date from outerwear;")
+    result = list(c.fetchall())
+    db.close()
+    return result
+
+def database_display_description():
+    db = connect("lost_and_found.db")
+    c = db.cursor()
+    c.execute("select description from outerwear;")
+    result = list(c.fetchall())
+    db.close()
+    return result
+
+def database_display_oneDate(id):
+    db = connect("lost_and_found.db")
+    c = db.cursor()
+    c.execute("select date from outerwear where rowid= (?);", (id))
+    result = list(c.fetchall())
+    db.close()
+    return result
+
+def database_display_oneDescription(id):
+    db = connect("lost_and_found.db")
+    c = db.cursor()
+    c.execute("select description from outerwear where rowid = (?);", (id))
     result = list(c.fetchall())
     db.close()
     return result
