@@ -6,14 +6,14 @@ def create_database():
     open("lost_and_found.db", "w")
     db = connect("lost_and_found.db")
     c = db.cursor()
-    c.execute("create table outerwear (date text, description text)")
+    c.execute("create table outerwear (INTEGER PRIMARY KEY, date text, description text)")
     db.commit()
     db.close()
 
 def database_add(date, description):
     db = connect("lost_and_found.db")
     c = db.cursor()
-    c.execute("insert into outerwear values (?, ?)", (date, description))
+    c.execute("insert into outerwear(date, description) values (?, ?)", (date, description))
     db.commit()
     db.close() 
 
@@ -33,15 +33,15 @@ def database_display_description():
     db.close()
     return result
 
-def database_display_oneDate(id):
+#def database_display_oneDate(id):
     db = connect("lost_and_found.db")
     c = db.cursor()
-    c.execute("select date from outerwear where rowid= (?);", (id))
+    c.execute("select date from outerwear where ROWID= (?);", (id))
     result = list(c.fetchall())
     db.close()
     return result
 
-def database_display_oneDescription(id):
+#def database_display_oneDescription(id):
     db = connect("lost_and_found.db")
     c = db.cursor()
     c.execute("select description from outerwear where rowid = (?);", (id))
@@ -49,4 +49,13 @@ def database_display_oneDescription(id):
     db.close()
     return result
 
+def get_row(idnum):
+    db = connect("lost_and_found.db")
+    c = db.cursor()
+    c.execute("select * from outerwear where ROWID = (?);", (idnum))
+    result = list(c.fetchall())
+    db.close()
+    return result
+
 create_database()
+print(get_row("2"))
