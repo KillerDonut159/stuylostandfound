@@ -58,7 +58,15 @@
             <br>So basically you can just put all the images into a designated image file and just load em directly from it
             <br>Though having them taken from some database or smth is prolly much better (but for now this works ha)
         </p>
-        
-   
+   </div> 
+
+   <h1>The input accept attribute</h1>
+
+<form action="/action_page.php">
+  <label for="img">Select image:</label>
+  <input type="file" id="img" name="img" accept="image/*" dirname="img.dir" formaction="../templates/imageloadtest.html">
+  <input type="submit" value="submit">
+</form>
+
     </body>
     </html>
