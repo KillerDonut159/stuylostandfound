@@ -17,6 +17,14 @@ def database_add(date, description):
     db.commit()
     db.close() 
 
+def database_display_all():
+    db = connect("lost_and_found.db")
+    c = db.cursor()
+    c.execute("select date,description from outerwear;")
+    result = list(c.fetchall())
+    db.close()
+    return result
+
 def database_display_date():
     db = connect("lost_and_found.db")
     c = db.cursor()
@@ -52,7 +60,7 @@ def database_display_description():
 def get_row(idnum):
     db = connect("lost_and_found.db")
     c = db.cursor()
-    c.execute("select * from outerwear where ROWID = (?);", (idnum))
+    c.execute("select date,description from outerwear where ROWID = (?);", (idnum))
     result = list(c.fetchall())
     db.close()
     return result

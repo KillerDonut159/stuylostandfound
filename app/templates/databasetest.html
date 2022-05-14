@@ -82,18 +82,11 @@
             </table>
             </p>
             </div>
-            <div class="container">
-                {% for i in outerweardate %}   
+            <div class="container"> 
                 <div class="row">
-                    <div class="col col-lg-5">
-                    {{ i }}
-                    </div>
-                </div>
-                {% endfor %}
-                {% for i in outerweardescription %}   
-                <div class="row">
-                    <div class="col col-lg-5">
-                    {{ i }}
+                {% for i in outerweardisplay %} 
+                    <div class="col col-xl-2">
+                    <h5 class="fw-light">{{ i }}</h5>
                     </div>
                 </div>
                 {% endfor %}

@@ -10,15 +10,8 @@ def hello():
     print(date, description)
     print(get_row("3"))
     database_add(date, description)
-    return render_template("databasetest.html", outerweardate=[database_display_date()], outerweardescription=[database_display_description()], row1= [get_row("1")], row2= [get_row("2")], row3= [get_row("3")]
+    return render_template("databasetest.html", outerweardisplay=[database_display_all()], outerweardate=[database_display_date()], outerweardescription=[database_display_description()], row1= [get_row("1")], row2= [get_row("2")], row3= [get_row("3")]
     )
-
-#def oneRow():
-    return render_template("databasetest.html", row1= [get_row("1")])
-
-def oneDescription(id):
-    return render_template(database_display_oneDate(id))
-
 
 if __name__ == "__main__":
     app.run(debug=True)
