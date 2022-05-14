@@ -65,33 +65,24 @@
         <br><br>
         <div class=main>
             <p>
-            <table style="width:100%;font-family:Trebuchet MS;">
-                <tr style="background-color:#f0f0f0">>
-                    <th>Date Catalogued</th>
-                    <th>Description</th>
-                </tr>
-                <tr>
-                    <td>{{ row1 }}</td>
-                </tr>
-                <tr>
-                    <td>{{ row2 }}</td>
-                </tr>
-                <tr>
-                    <td>{{ row3 }}</td>
-                </tr>
-            </table>
+                <table style="width:100%;font-family:Trebuchet MS;">
+                    <thead>
+                        <tr style="background-color:#f0f0f0">>
+                            <td>Date Catalogued</td>
+                            <td>Description</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in rows %} 
+                            <tr>
+                                <td>{{ i[0] }}</td>
+                                <td>{{ i[1] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </p>
-            </div>
-            <div class="container"> 
-                <div class="row">
-                {% for i in outerweardisplay %} 
-                    <div class="col col-xl-2">
-                    <h5 class="fw-light">{{ i }}</h5>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
         </div>
-    
-    
-      
+    </div>
+</body>
+</html>
