@@ -65,5 +65,4 @@ def get_row(idnum):
     db.close()
     return result
 
-create_database()
 #print(get_row("2"))

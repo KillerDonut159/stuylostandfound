@@ -57,11 +57,11 @@
         <form action="/submit" method="POST" enctype="multipart/form-data">
             <label for="type">Type:</label>
             <select name="type" id="type">
-                <option value="outerwear">Outerwear</option>
-                <option value="smallitems">Small Items</option>
                 <option value="bookspapers">Books/Papers</option>
+                <option value="outerwear">Outerwear</option>
                 <option value="gloveshatsscarves">Gloves/Hats/Scarves</option>
                 <option value="personalschoolsupplies">Personal School Supplies</option>
+                <option value="smallitems">Small Items</option>
             </select>
             <label for="date">Date:</label>
             <input type="text" id="date" name="date"><br><br>
@@ -86,16 +86,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for i in rows %} 
+                        {% for i in outerwear %} 
                             <tr>
-                                <td>{{ i[0] }}</td>
-                                <td>{{ i[1] }}</td>
                                 <td>
                                     <img width="100px" src="data:image/png;base64, {{ i[2] }}" />
                                     {% if i[3] %}
                                         <img width="100px" src="data:image/png;base64, {{ i[3] }}" />
                                     {% endif %}
                                 </td>
+                                <td>{{ i[0] }}</td>
+                                <td>{{ i[1] }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>

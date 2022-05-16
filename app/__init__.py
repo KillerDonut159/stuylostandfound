@@ -11,7 +11,46 @@ app = Flask(__name__)
 def hello():
     return render_template(
         "databasetest.html", 
-        rows=database_display_all('outerwear')
+        bookspapers=database_display_all('bookspapers'),
+        outerwear=database_display_all('outerwear'),
+        gloves=database_display_all('gloveshatsscarves'),
+        personalschool=database_display_all('personalschoolsupplies'),
+        smallitems=database_display_all('smallitems'),
+    )
+
+@app.route("/", methods=["GET","POST"])
+def itsme():
+    return render_template(
+        "bookspapers.html", 
+        bookspapers=database_display_all('bookspapers')
+    )
+
+@app.route("/", methods=["GET","POST"])
+def iwaswondering():
+    return render_template(
+        "outerwear.html", 
+        outerwear=database_display_all('outerwear')
+    )
+
+@app.route("/", methods=["GET","POST"])
+def ifafteralltheseyears():
+    return render_template(
+        "gloves.html", 
+        gloves=database_display_all('gloveshatsscarves')
+    )
+
+@app.route("/", methods=["GET","POST"])
+def youdliketomeet():
+    return render_template(
+        "personalschoolsupplies.html", 
+        personalschool=database_display_all('personalschoolsupplies')
+    )
+
+@app.route("/", methods=["GET","POST"])
+def togoovereverything():
+    return render_template(
+        "smallitems.html", 
+        smallitems=database_display_all('smallitems')
     )
 
 @app.route("/submit", methods=["POST"])
@@ -25,6 +64,7 @@ def submit():
         if image_name in request.files:
             image = request.files[image_name].read()
 
+            #Attempt to add a HEIC to JPEG converter
             """fmt = whatimage.identify_image(image)
             if fmt in ['heic', 'avif']:
                 i = pyheif.read_heif(image)
@@ -35,6 +75,7 @@ def submit():
 
                 image.save(s, format="jpeg")
                 image = image.read()"""
+
             image_string = base64.b64encode(image)
             images[index] = image_string.decode('utf-8')
 
