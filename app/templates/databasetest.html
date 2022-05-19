@@ -75,6 +75,8 @@
         </form>
 
         <br><br>
+        <h3 class="text-danger fw-light text-center">Outerwear</h3>
+
         <div class=main>
             <p>
                 <table style="width:100%;font-family:Trebuchet MS;">
@@ -102,6 +104,36 @@
                 </table>
             </p>
         </div>
+
+        <h3 class="text-danger fw-light text-center">Full Catalogue</h3>
+        <div class=main>
+            <p>
+                <table style="width:100%;font-family:Trebuchet MS;">
+                    <thead>
+                        <tr style="background-color:#f0f0f0">>
+                            <td>Date Catalogued</td>
+                            <td>Description</td>
+                            <td>Images</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in outerwear %} 
+                            <tr>
+                                <td>
+                                    <img width="100px" src="data:image/png;base64, {{ i[2] }}" />
+                                    {% if i[3] %}
+                                        <img width="100px" src="data:image/png;base64, {{ i[3] }}" />
+                                    {% endif %}
+                                </td>
+                                <td>{{ i[0] }}</td>
+                                <td>{{ i[1] }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </p>
+        </div>
+
     </div>
 </body>
 </html>
