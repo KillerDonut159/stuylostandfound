@@ -19,35 +19,35 @@ def hello():
         full=database_display_full(),
     )
 
-@app.route("/", methods=["GET","POST"])
+@app.route("/booksandpapers", methods=["GET","POST"])
 def itsme():
     return render_template(
         "bookspapers.html", 
         bookspapers=database_display_all('bookspapers')
     )
 
-@app.route("/", methods=["GET","POST"])
+@app.route("/outerwears", methods=["GET","POST"])
 def iwaswondering():
     return render_template(
         "outerwear.html", 
         outerwear=database_display_all('outerwear')
     )
 
-@app.route("/", methods=["GET","POST"])
+@app.route("/gloves", methods=["GET","POST"])
 def ifafteralltheseyears():
     return render_template(
-        "gloves.html", 
+        "gloveshatsscarves.html", 
         gloves=database_display_all('gloveshatsscarves')
     )
 
-@app.route("/", methods=["GET","POST"])
+@app.route("/personalschool", methods=["GET","POST"])
 def youdliketomeet():
     return render_template(
         "personalschoolsupplies.html", 
         personalschool=database_display_all('personalschoolsupplies')
     )
 
-@app.route("/", methods=["GET","POST"])
+@app.route("/small", methods=["GET","POST"])
 def togoovereverything():
     return render_template(
         "smallitems.html", 
