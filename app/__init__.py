@@ -26,7 +26,7 @@ def itsme():
         bookspapers=database_display_all('bookspapers')
     )
 
-@app.route("/outerwears", methods=["GET","POST"])
+@app.route("/templates/outerwears", methods=["GET","POST"])
 def iwaswondering():
     return render_template(
         "outerwear.html", 
