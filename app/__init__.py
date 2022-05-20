@@ -16,6 +16,7 @@ def hello():
         gloves=database_display_all('gloveshatsscarves'),
         personalschool=database_display_all('personalschoolsupplies'),
         smallitems=database_display_all('smallitems'),
+        full=database_display_full(),
     )
 
 @app.route("/", methods=["GET","POST"])
@@ -80,6 +81,12 @@ def submit():
             images[index] = image_string.decode('utf-8')
 
     database_add(type, date, description, images[0], images[1])
+    return redirect(url_for('hello'))
+
+@app.route("/confirm", methods=["GET","POST"])
+def delete():
+    idnum = request.form.get("idn")
+    database_delete(idnum)
     return redirect(url_for('hello'))
 
 if __name__ == "__main__":

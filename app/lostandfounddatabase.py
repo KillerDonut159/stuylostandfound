@@ -6,7 +6,7 @@ def create_database():
     open("lost_and_found.db", "w")
     db = connect("lost_and_found.db")
     c = db.cursor()
-    c.execute("create table lost (INTEGER PRIMARY KEY, type text, date text, description text, image1 text, image2 text)")
+    c.execute("create table lost (id INTEGER PRIMARY KEY, type text, date text, description text, image1 text, image2 text)")
     db.commit()
     db.close()
 
@@ -17,10 +17,25 @@ def database_add(type, date, description, image1, image2):
     db.commit()
     db.close() 
 
+def database_delete(idnum):
+    db = connect("lost_and_found.db")
+    c = db.cursor()
+    c.execute("delete from lost where ROWID = (?);", (idnum))
+    db.commit()
+    db.close() 
+
 def database_display_all(type):
     db = connect("lost_and_found.db")
     c = db.cursor()
     c.execute("select date, description, image1, image2 from lost WHERE type = ?;", (type,))
+    result = list(c.fetchall())
+    db.close()
+    return result
+
+def database_display_full():
+    db = connect("lost_and_found.db")
+    c = db.cursor()
+    c.execute("select * from lost;")
     result = list(c.fetchall())
     db.close()
     return result
@@ -57,7 +72,7 @@ def database_display_description():
     db.close()
     return result
 
-def get_row(idnum):
+#def get_row(idnum):
     db = connect("lost_and_found.db")
     c = db.cursor()
     c.execute("select date, description from lost where ROWID = (?);", (idnum))

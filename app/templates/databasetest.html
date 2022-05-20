@@ -82,9 +82,9 @@
                 <table style="width:100%;font-family:Trebuchet MS;">
                     <thead>
                         <tr style="background-color:#f0f0f0">>
+                            <td>Images</td>
                             <td>Date Catalogued</td>
                             <td>Description</td>
-                            <td>Images</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -104,29 +104,59 @@
                 </table>
             </p>
         </div>
+        <br><br>
 
-        <h3 class="text-danger fw-light text-center">Full Catalogue</h3>
+        <div class="container mb-3 mt-4 mb-4">
+            <form action="/displaytype" method="POST" enctype="multipart/form-data">
+                <label for="type">Display Type:</label>
+                <select name="type" id="type">
+                    <option value="bookspapers">All</option>
+                    <option value="bookspapers">Books/Papers</option>
+                    <option value="outerwear">Outerwear</option>
+                    <option value="gloveshatsscarves">Gloves/Hats/Scarves</option>
+                    <option value="personalschoolsupplies">Personal School Supplies</option>
+                    <option value="smallitems">Small Items</option>
+                </select>
+                <br><br>
+            </form>
+            
+            <form action="/confirm" method="POST" enctype="multipart/form-data">
+                <label for="type">ID to Delete:</label>
+                <select name="idn" id="idn">
+                    {% for i in full %}
+                    <option> {{ i[0] }} </option>
+                    {% endfor %}
+                </select>
+                <br>
+                <input class="btn btn-info mb-1 mt-1" type="submit" value="Confirm">
+            </form>
+            
+        <h3 class="text-danger fw-light text-center">All Items</h3>
         <div class=main>
             <p>
                 <table style="width:100%;font-family:Trebuchet MS;">
                     <thead>
                         <tr style="background-color:#f0f0f0">>
+                            <td>Images</td>
+                            <td>ID</td>
+                            <td>Type</td>
                             <td>Date Catalogued</td>
                             <td>Description</td>
-                            <td>Images</td>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for i in outerwear %} 
+                        {% for i in full %} 
                             <tr>
                                 <td>
-                                    <img width="100px" src="data:image/png;base64, {{ i[2] }}" />
-                                    {% if i[3] %}
-                                        <img width="100px" src="data:image/png;base64, {{ i[3] }}" />
+                                    <img width="100px" src="data:image/png;base64, {{ i[4] }}" />
+                                    {% if i[5] %}
+                                        <img width="100px" src="data:image/png;base64, {{ i[5] }}" />
                                     {% endif %}
                                 </td>
                                 <td>{{ i[0] }}</td>
                                 <td>{{ i[1] }}</td>
+                                <td>{{ i[2] }}</td>
+                                <td>{{ i[3] }}</td>
                             </tr>
                         {% endfor %}
                     </tbody>
